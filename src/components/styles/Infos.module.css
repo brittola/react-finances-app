@@ -10,11 +10,7 @@
 @media screen and (max-width: 750px) {
     .container{
         gap: 1vw;
-    }
-}
-
-@media screen and (max-width: 350px) {
-    .container{
-        gap: 2px;
+        overflow-x: scroll;
+        justify-content: flex-start;
     }
 }
