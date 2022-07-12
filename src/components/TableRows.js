@@ -29,7 +29,7 @@ function TableRows(props) {
                         {getIcon(transaction.type)}
                     </td>
                     <td>
-                        <BsTrashFill onClick={() => { props.deleteTransaction(transaction.id) }} />
+                        <BsTrashFill className="pointer" onClick={() => { props.deleteTransaction(transaction.id) }} />
                     </td>
                 </tr>
             )
