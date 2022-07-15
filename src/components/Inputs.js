@@ -1,8 +1,12 @@
 import styles from './styles/Inputs.module.css';
 import { useState } from 'react';
+import { addTransaction } from '../actions/financesActions';
+import { addIO } from '../actions/ioActions';
+import { useDispatch } from 'react-redux';
 
-function Inputs(props) {
+function Inputs() {
 
+    const dispatch = useDispatch();
     const [desc, setDesc] = useState('');
     const [value, setValue] = useState('');
     const [type, setType] = useState('income');
@@ -19,14 +23,25 @@ function Inputs(props) {
             return;
         }
 
-        props.addTransaction(desc, value, type);
+        dispatch(addTransaction(desc, value, type));
+
+        switch(type) {
+            case 'income':
+                dispatch(addIO('ADD_INCOME', value));
+                break;
+            case 'outcome':
+                dispatch(addIO('ADD_OUTCOME', value));
+                break;
+            default:
+                break;
+        }
 
         setDesc('');
         setValue('');
     }
 
     function handleKeypress(e) {
-        if(e.key === 'Enter'){
+        if (e.key === 'Enter') {
             handleAdd();
         }
     }

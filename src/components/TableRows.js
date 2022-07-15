@@ -1,8 +1,13 @@
 import { BsTrashFill } from 'react-icons/bs';
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { BsFillArrowDownCircleFill } from "react-icons/bs";
+import { useDispatch } from 'react-redux';
+import { deleteTransaction } from '../actions/financesActions';
+import { deleteIO } from '../actions/ioActions';
 
 function TableRows(props) {
+
+    const dispatch = useDispatch();
 
     function getIcon(type) {
         switch (type) {
@@ -12,6 +17,21 @@ function TableRows(props) {
                 return <BsFillArrowDownCircleFill />
             default:
                 return;
+        }
+    }
+
+    function handleDelete(transaction) {
+        dispatch(deleteTransaction(transaction.id));
+
+        switch(transaction.type) {
+            case 'income':
+                dispatch(deleteIO('DELETE_INCOME', transaction.value));
+                break;
+            case 'outcome':
+                dispatch(deleteIO('DELETE_OUTCOME', transaction.value));
+                break;
+            default:
+                break;
         }
     }
 
@@ -29,7 +49,7 @@ function TableRows(props) {
                         {getIcon(transaction.type)}
                     </td>
                     <td>
-                        <BsTrashFill className="pointer" onClick={() => { props.deleteTransaction(transaction.id) }} />
+                        <BsTrashFill className="pointer" onClick={() => { handleDelete(transaction) }} />
                     </td>
                 </tr>
             )

@@ -1,29 +1,31 @@
 import styles from './styles/Outputs.module.css';
 import TableRows from './TableRows';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-function Outputs(props) {
+function Outputs() {
 
+    let transactions = useSelector(state => state).finances;
     const [filter, setFilter] = useState('all');
-    const [filtered, setFiltered] = useState(props.transactions);
+    const [filtered, setFiltered] = useState(transactions);
 
     useEffect(() => {
         switch (filter) {
             case 'all':
-                setFiltered(props.transactions);
+                setFiltered(transactions);
                 break;
             case 'incomes':
-                let incomesFilter = props.transactions.filter(transaction => transaction.type === 'income');
+                let incomesFilter = transactions.filter(transaction => transaction.type === 'income');
                 setFiltered(incomesFilter);
                 break;
             case 'outcomes':
-                let outcomesFilter = props.transactions.filter(transaction => transaction.type === 'outcome');
+                let outcomesFilter = transactions.filter(transaction => transaction.type === 'outcome');
                 setFiltered(outcomesFilter);
                 break;
             default:
                 break;
         }
-    }, [filter, props.transactions])
+    }, [filter, transactions])
 
     return (
         <section>
@@ -57,7 +59,7 @@ function Outputs(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        <TableRows transactions={filtered} deleteTransaction={props.deleteTransaction} />
+                        <TableRows transactions={filtered} />
                     </tbody>
                 </table>
             </div>
