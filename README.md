@@ -4,6 +4,8 @@ App de controle de Finanças com React.
 
 ### Dependências:
 - React Icons `npm install react-icons --save`
+- Redux `npm install redux`
+- React-Redux `npm install react-redux`
 
 # Getting Started with Create React App
 
