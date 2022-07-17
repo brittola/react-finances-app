@@ -2,6 +2,8 @@
 
 App de controle de Finanças com React.
 
+Deploy do projeto: https://finances-app-theta.vercel.app/
+
 ### Dependências:
 - React Icons `npm install react-icons --save`
 - Redux `npm install redux`
